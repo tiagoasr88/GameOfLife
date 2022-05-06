@@ -49,11 +49,27 @@ namespace GameOfLife.Console
             {
                 for (int y = 1; y < Grid.GetLength(1) - 1; y++)
                 {
-                    novoGrid[x, y] = new Cell(x, y, this.Grid[x, y].Evoluir(this.Grid));
+                    var cell = GetCell(Grid, x, y);
+                    Cell[] celulasVizinhas = GetCelulasVizinhas(cell);
+
+                    novoGrid[x, y] = new Cell(x, y, this.Grid[x, y].Evoluir(celulasVizinhas));
                 }
             }
 
             return novoGrid;
         }
+
+        private Cell[] GetCelulasVizinhas(Cell cell) => new Cell[] {
+                        GetCell(Grid ,cell.X - 1, cell.Y - 1), //1
+                        GetCell(Grid ,cell.X, cell.Y-1 ), //2
+                        GetCell(Grid ,cell.X + 1, cell.Y - 1), //3
+                        GetCell(Grid ,cell.X - 1, cell.Y), //4
+                        GetCell(Grid ,cell.X + 1, cell.Y), //6
+                        GetCell(Grid ,cell.X - 1, cell.Y + 1), //7
+                        GetCell(Grid ,cell.X, cell.Y + 1), //8
+                        GetCell(Grid ,cell.X + 1, cell.Y + 1) //9
+                    };
+
+        private Cell GetCell(Cell[,] grid, long x, long y) => grid[x, y];
     }
 }
