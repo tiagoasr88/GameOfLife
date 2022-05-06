@@ -25,27 +25,9 @@ namespace GameOfLife.Console
             Y = y;
         }
 
-        public bool Evoluir(Cell[,] grid)
+        public bool Evoluir(Cell[] celulasVizinhas)
         {
-            byte vivos = 0;
-            byte mortos = 0;
-
-            var celulasVizinhas = new[] {
-                new {x = X - 1, y = Y - 1}, //1
-                new {x = X, y = Y-1 }, //2
-                new {x = X + 1, y = Y - 1}, //3
-                new {x = X - 1, y = Y}, //4
-                new {x = X + 1, y = Y}, //6
-                new {x = X - 1, y = Y + 1}, //7
-                new {x = X, y = Y + 1}, //8
-                new {x = X + 1, y = Y + 1}, //9
-            };
-
-            foreach (var celula in celulasVizinhas)
-            {
-                var cell = GetCell(grid, celula.x, celula.y);
-                CalcularVida(ref vivos, ref mortos, cell);
-            }
+            var vivos = CalcularSobreviventes(celulasVizinhas);
 
             if (Vivo && (vivos == 2 || vivos == 3))
                 return true;
@@ -56,35 +38,16 @@ namespace GameOfLife.Console
             return false;
         }
 
-        private Cell GetCell(Cell[,] grid, long x, long y)
+        private byte CalcularSobreviventes(Cell[] celulasVizinhas)
         {
-            return grid[x, y];
-        }
+            byte vivos = 0;
 
-        private object[] GetCelulasVizinhas()
-        {
-            return new[] {
-                new {x = X - 1, y = Y - 1}, //1
-                new {x = X, y = Y-1 }, //2
-                new {x = X + 1, y = Y - 1}, //3
-                new {x = X - 1, y = Y}, //4
-                new {x = X + 1, y = Y}, //6
-                new {x = X - 1, y = Y + 1}, //7
-                new {x = X, y = Y + 1}, //8
-                new {x = X + 1, y = Y + 1} //9
-            };
-        }
+            foreach (var celula in celulasVizinhas)
+            {
+                if (celula.Vivo) vivos++;
+            }
 
-        private static void CalcularVida(ref byte vivos, ref byte mortos, Cell cell)
-        {
-            if (cell.Vivo)
-            {
-                vivos++;
-            }
-            else
-            {
-                mortos++;
-            }
+            return vivos;
         }
     }
 }

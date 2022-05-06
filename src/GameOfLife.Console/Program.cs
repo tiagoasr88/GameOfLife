@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using GameOfLife.Console;
 
+Console.CursorVisible = false;
+
 var game = new Game();
 
 game.CriarGridVazio(45);
@@ -14,6 +16,7 @@ for (int i = 0; i < 720; i++)
 
     // escrever grid
     Console.SetCursorPosition(0, 0);
+    Console.CursorVisible = false;
     for (int x = 1; x < game.Grid.GetLength(0) - 1; x++)
     {
         Console.Write("|");
