@@ -3,27 +3,27 @@ using GameOfLife.Console;
 
 Console.CursorVisible = false;
 
-var game = new Game();
+var game = new Jogo();
 
-game.CriarGridVazio(45);
+game.CriarTabuleiroVazio(45);
 game.CriarPopulacao(220);
 
 for (int i = 0; i < 720; i++)
 {
-    game.Grid = game.Evoluir();
+    game.Tabuleiro = game.Evoluir();
 
     Thread.Sleep(200);
 
     // escrever grid
     Console.SetCursorPosition(0, 0);
     Console.CursorVisible = false;
-    for (int x = 1; x < game.Grid.GetLength(0) - 1; x++)
+    for (int x = 1; x < game.Tabuleiro.GetLength(0) - 1; x++)
     {
         Console.Write("|");
 
-        for (int y = 1; y < game.Grid.GetLength(1) - 1; y++)
+        for (int y = 1; y < game.Tabuleiro.GetLength(1) - 1; y++)
         {
-            Console.Write($"{(game.Grid[x, y].Vivo ? "@" : " ")}|");
+            Console.Write($"{(game.Tabuleiro[x, y].Vivo ? "@" : " ")}|");
         }
         Console.WriteLine();
     }

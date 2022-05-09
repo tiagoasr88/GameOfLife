@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameOfLife.Console
+﻿namespace GameOfLife.Console
 {
-    public class Cell
+    public class Celula
     {
         public bool Vivo { get; set; }
         public long X { get; set; }
         public long Y { get; set; }
 
-        public Cell(long x, long y)
+        public Celula(long x, long y)
         {
             this.X = x;
             this.Y = y;
         }
 
-        public Cell(long x, long y, bool vivo)
+        public Celula(long x, long y, bool vivo)
         {
             Vivo = vivo;
             X = x;
             Y = y;
         }
 
-        public bool Evoluir(Cell[] celulasVizinhas)
+        public bool Evoluir(Celula[] celulasVizinhas)
         {
             var vivos = CalcularSobreviventes(celulasVizinhas);
 
@@ -38,7 +32,7 @@ namespace GameOfLife.Console
             return false;
         }
 
-        private byte CalcularSobreviventes(Cell[] celulasVizinhas)
+        private byte CalcularSobreviventes(Celula[] celulasVizinhas)
         {
             byte vivos = 0;
 

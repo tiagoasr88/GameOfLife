@@ -3,32 +3,32 @@ using Xunit;
 
 namespace GameOfLife.Tests
 {
-    public class GameTests
+    public class JogoTests
     {
-        private Game game;
+        private Jogo jogo;
 
-        public GameTests()
+        public JogoTests()
         {
-            game = new Game();
-            game.CriarGridVazio(12);
+            jogo = new Jogo();
+            jogo.CriarTabuleiroVazio(12);
         }
 
         [Fact]
         public void DevePermitirSomenteGridsQuadrados()
         {
-            Assert.Equal(2, game.Grid.Rank);
+            Assert.Equal(2, jogo.Tabuleiro.Rank);
         }
 
         [Fact]
         public void DevePossuirLarguraIgualA12()
         {
-            Assert.Equal(12 + 2, game.Grid.GetLength(0));
+            Assert.Equal(12 + 2, jogo.Tabuleiro.GetLength(0));
         }
 
         [Fact]
         public void DevePossuirAlturaIgualA12()
         {
-            Assert.Equal(12 + 2, game.Grid.GetLength(1));
+            Assert.Equal(12 + 2, jogo.Tabuleiro.GetLength(1));
         }
     }
 }
